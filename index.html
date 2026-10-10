@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calcule seus custos e descubra quanto cobrar pelos seus produtos artesanais.">
+    <title>Precifica — Precificação Artesanal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="topo">
+        <a class="marca" href="#" aria-label="Precifica, página inicial">
+            <span class="marca-icone">✳</span>
+            <span>precifica<span class="ponto">.</span></span>
+        </a>
+        <span class="selo">SUA CRIATIVIDADE VALE</span>
+    </header>
+
+    <main class="container">
+        <section class="introducao">
+            <span class="etiqueta">✦ SEU TRABALHO, SEU VALOR</span>
+            <h1>Feito com carinho.<br><span>Precificado com inteligência.</span></h1>
+            <p>Informe seus custos e descubra um preço justo para seus produtos, sem esquecer o valor do seu trabalho.</p>
+        </section>
+
+        <section class="calculadora">
+            <form id="form-calculadora">
+                <div class="secao-titulo">
+                    <span class="numero">01</span>
+                    <div>
+                        <h2>Vamos conhecer seu produto?</h2>
+                        <p>Comece preenchendo os detalhes abaixo.</p>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="produto">Nome do produto</label>
+                    <input id="produto" type="text" maxlength="80"
+                        placeholder="Ex.: Bolo de cenoura, vela artesanal..." value="Bolo caseiro">
+                </div>
+
+                <div class="grade-campos">
+                    <div class="campo">
+                        <label for="materiais">Ingredientes ou materiais (R$)</label>
+                        <input id="materiais" type="number" min="0" step="0.01" value="30" required>
+                    </div>
+                    <div class="campo">
+                        <label for="extras">Outros custos do lote (R$)</label>
+                        <input id="extras" type="number" min="0" step="0.01" value="10" required>
+                        <small>Embalagem, energia e outros gastos.</small>
+                    </div>
+                    <div class="campo">
+                        <label for="horas">Horas de trabalho</label>
+                        <input id="horas" type="number" min="0" step="0.25" value="2" required>
+                    </div>
+                    <div class="campo">
+                        <label for="valor-hora">Valor da sua hora (R$)</label>
+                        <input id="valor-hora" type="number" min="0" step="0.01" value="15" required>
+                    </div>
+                    <div class="campo">
+                        <label for="unidades">Unidades produzidas no lote</label>
+                        <input id="unidades" type="number" min="1" step="1" value="1" required>
+                    </div>
+                    <div class="campo">
+                        <label for="taxas">Taxas sobre a venda (%)</label>
+                        <input id="taxas" type="number" min="0" max="99.99" step="0.1" value="0" required>
+                        <small>Cartão, plataforma ou comissão.</small>
+                    </div>
+                </div>
+
+                <div class="campo margem-campo">
+                    <div class="margem-cabecalho">
+                        <label for="margem">Margem de lucro desejada</label>
+                        <output id="margem-valor" for="margem">30%</output>
+                    </div>
+                    <input id="margem" type="range" min="0" max="70" step="1" value="30">
+                    <div class="limites">
+                        <span>0% de lucro</span>
+                        <span>70% de margem</span>
+                    </div>
+                    <small>A margem é calculada sobre o preço de venda, não sobre o custo.</small>
+                </div>
+                <div class="acoes">
+                    <button class="botao" id="botao-limpar" type="button">
+                        Limpar campos
+                    </button>
+                    <button class="botao-secundario" id="botao-restaurar" type="button">
+                        Restaurar exemplo
+                    </button>
+                </div>
+                <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+
+
+            </form>
+            
+             <aside
+             class="resultado"
+             id="painel-resultado"
+             aria-live="polite"
+             aria-atomic="true"
+             tabindex="-1"
+             >
+                <span class="resultado-etiqueta">✦ SEU RESULTADO</span>
+                <h2 id="nome-resultado">Bolo caseiro</h2>
+                <p class="legenda">Preço de venda sugerido por unidade</p>
+                <p id="preco" class="preco">R$ 57,14</p>
+                <p id="resumo" class="resumo">Um preço calculado para valorizar seu trabalho.</p>
+
+                <div class="divisor"></div>
+
+                <div class="linha-resultado">
+                    <span>Custo por unidade</span>
+                    <strong id="custo-unitario">R$ 70,00</strong>
+                </div>
+                <div class="linha-resultado">
+                    <span>Lucro por unidade</span>
+                    <strong id="lucro-unitario">R$ 0,00</strong>
+                </div>
+                <div class="linha-resultado">
+                    <span>Margem estimada</span>
+                    <strong id="margem-real">30%</strong>
+                </div>
+                <div class="linha-resultado">
+                    <span>Custo total do lote</span>
+                    <strong id="custo-lote">R$ 70,00</strong>
+                </div>
+
+                <p class="aviso">Este é um preço estimado. Confira se todos os seus custos foram incluídos antes de vender.</p>
+            </aside>
+        </section>
+
+        <footer>
+            <p>Feito para quem transforma ideias em algo especial. ✿</p>
+            <p>Precifica · Calculadora de precificação artesanal</p>
+        </footer>
+    </main>
+</body>
+</html>
