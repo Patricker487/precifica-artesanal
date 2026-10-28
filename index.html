@@ -10,13 +10,194 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <section id="tela-acesso" class="tela-acesso" aria-labelledby="titulo-acesso">
+        <div class="cartao-acesso">
+            <a class="marca marca-acesso" href="#" aria-label="Precifica">
+                <span class="marca-icone">✳</span><span>precifica<span class="ponto">.</span></span>
+            </a>
+            <span class="etiqueta">SEU NEGÓCIO, ORGANIZADO</span>
+            <h1 id="titulo-acesso">Que bom ter você aqui!</h1>
+            <p class="texto-acesso">Entre com seu nickname e senha para acessar seus produtos, vendas e histórico.</p>
+            <form id="form-acesso" class="form-acesso">
+                <label for="nickname-acesso">Seu nickname</label>
+                <input id="nickname-acesso" name="nickname" type="text" maxlength="30" autocomplete="username" placeholder="Ex.: meus_artesanatos" required>
+                <label for="senha-acesso">Senha</label>
+                <input id="senha-acesso" name="senha" type="password" minlength="8" autocomplete="current-password" placeholder="Pelo menos 8 caracteres" required>
+                <div class="acoes-acesso">
+                    <button class="botao botao-acesso" type="submit" id="botao-acessar">Entrar</button>
+                    <button class="botao botao-criar-perfil" type="button" id="botao-criar-perfil">Criar perfil</button>
+                </div>
+            </form>
+            <p id="mensagem-acesso" class="mensagem-acesso" role="status" aria-live="polite"></p>
+            <p class="nota-acesso">No primeiro acesso a um perfil antigo, digite a senha que deseja definir. Perfis novos precisam de senha com pelo menos 8 caracteres.</p>
+        </div>
+    </section>
     <header class="topo">
         <a class="marca" href="#" aria-label="Precifica, página inicial">
             <span class="marca-icone">✳</span>
             <span>precifica<span class="ponto">.</span></span>
         </a>
-        <span class="selo">SUA CRIATIVIDADE VALE</span>
+        <div class="topo-acoes">
+            <span class="selo">SUA CRIATIVIDADE VALE</span>
+            <button class="botao-historico" id="abrir-catalogo" type="button"
+                    aria-controls="painel-catalogo" aria-expanded="false">
+                <span aria-hidden="true">▤</span> Meu catálogo
+            </button>
+            <button class="botao-historico" id="abrir-venda" type="button"
+                    aria-controls="painel-venda" aria-expanded="false">
+                <span aria-hidden="true">＋</span> Registrar venda
+            </button>
+            <button class="botao-historico" id="abrir-historico" type="button"
+                    aria-controls="painel-historico" aria-expanded="false">
+                <span aria-hidden="true">◷</span> Meu histórico
+            </button>
+            <button class="botao-historico" id="botao-sair" type="button">Sair</button>
+        </div>
     </header>
+
+    <div class="historico-sobreposicao" id="historico-sobreposicao" hidden></div>
+    <aside class="painel-historico" id="painel-historico"
+           aria-labelledby="titulo-historico" aria-hidden="true">
+        <div class="historico-cabecalho">
+            <div>
+                <span class="etiqueta">SEU NEGÓCIO</span>
+                <h2 id="titulo-historico">Histórico de vendas</h2>
+            </div>
+            <button class="fechar-historico" id="fechar-historico" type="button"
+                    aria-label="Fechar histórico">×</button>
+        </div>
+        <p class="historico-intro">Informe seu nickname para consultar as vendas registradas.</p>
+        <form id="form-nickname" class="form-nickname">
+            <label for="nickname-historico">Seu nickname</label>
+            <div class="nickname-linha">
+                <input id="nickname-historico" name="nickname" type="text"
+                       maxlength="30" placeholder="Ex.: artesao_teste" required>
+                <button class="botao" type="submit">Consultar</button>
+            </div>
+        </form>
+        <p id="mensagem-historico" class="mensagem-historico" role="status" aria-live="polite"></p>
+        <div id="resumo-historico" class="resumo-historico" hidden></div>
+        <div id="lista-historico" class="lista-historico">
+            <div class="historico-vazio">Suas vendas aparecerão aqui após a consulta.</div>
+        </div>
+        <p class="historico-nota">Projeto experimental: o nickname identifica o histórico, mas não é uma senha.</p>
+    </aside>
+
+    <aside class="painel-historico painel-catalogo" id="painel-catalogo"
+           aria-labelledby="titulo-catalogo" aria-hidden="true">
+        <div class="historico-cabecalho">
+            <div>
+                <span class="etiqueta">SEU NEGÓCIO</span>
+                <h2 id="titulo-catalogo">Meu catálogo</h2>
+            </div>
+            <button class="fechar-historico" id="fechar-catalogo" type="button"
+                    aria-label="Fechar catálogo">×</button>
+        </div>
+        <p class="historico-intro">Cadastre e consulte os produtos e serviços do seu negócio.</p>
+        <form id="form-catalogo-nickname" class="form-nickname">
+            <label for="nickname-catalogo">Seu nickname</label>
+            <div class="nickname-linha">
+                <input id="nickname-catalogo" name="nickname" type="text"
+                       maxlength="30" placeholder="Ex.: artesao_teste" required>
+                <button class="botao" type="submit">Carregar</button>
+            </div>
+        </form>
+        <p id="mensagem-catalogo" class="mensagem-historico" role="status" aria-live="polite"></p>
+        <form id="form-produto" class="form-produto" hidden>
+            <h3 id="titulo-form-produto">Novo item</h3>
+            <div class="campo">
+                <label for="produto-nome">Nome do produto ou serviço</label>
+                <input id="produto-nome" maxlength="100" required placeholder="Ex.: Caneca artesanal">
+            </div>
+            <div class="campo">
+                <label for="produto-descricao">Descrição (opcional)</label>
+                <textarea id="produto-descricao" rows="2" maxlength="300" placeholder="Detalhes do item"></textarea>
+            </div>
+            <div class="campo">
+                <label for="produto-tipo">Tipo</label>
+                <select id="produto-tipo" required>
+                    <option value="produto">Produto</option>
+                    <option value="servico">Serviço</option>
+                </select>
+            </div>
+            <div class="grade-campos">
+                <div class="campo">
+                    <label for="produto-preco">Preço de venda (R$)</label>
+                    <input id="produto-preco" type="number" min="0" step="0.01" required placeholder="35,00">
+                </div>
+                <div class="campo">
+                    <label for="produto-custo">Custo (R$)</label>
+                    <input id="produto-custo" type="number" min="0" step="0.01" value="0" required>
+                </div>
+            </div>
+            <div class="acoes-form-produto"><button class="botao botao-catalogo-salvar" id="botao-salvar-produto" type="submit">Salvar no catálogo</button><button class="botao-cancelar-edicao" id="cancelar-edicao-produto" type="button" hidden>Cancelar edição</button></div>
+        </form>
+        <div class="catalogo-lista-cabecalho">
+            <h3>Itens cadastrados</h3>
+            <span id="total-catalogo">0 itens</span>
+        </div>
+        <div id="lista-catalogo" class="lista-historico">
+            <div class="historico-vazio">Informe seu nickname para carregar o catálogo.</div>
+        </div>
+        <p class="historico-nota">Projeto experimental: o nickname serve como identificador simples.</p>
+    </aside>
+
+    <aside class="painel-historico painel-venda" id="painel-venda"
+           aria-labelledby="titulo-venda" aria-hidden="true">
+        <div class="historico-cabecalho">
+            <div>
+                <span class="etiqueta">SEU NEGÓCIO</span>
+                <h2 id="titulo-venda">Registrar venda</h2>
+            </div>
+            <button class="fechar-historico" id="fechar-venda" type="button"
+                    aria-label="Fechar registro de venda">×</button>
+        </div>
+        <p class="historico-intro">Escolha os itens do seu catálogo e registre a venda.</p>
+        <form id="form-venda-nickname" class="form-nickname">
+            <label for="nickname-venda">Seu nickname</label>
+            <div class="nickname-linha">
+                <input id="nickname-venda" name="nickname" type="text"
+                       maxlength="30" placeholder="Ex.: artesao_teste" required>
+                <button class="botao" type="submit">Carregar</button>
+            </div>
+        </form>
+        <p id="mensagem-venda" class="mensagem-historico" role="status" aria-live="polite"></p>
+        <form id="form-itens-venda" class="form-produto" hidden>
+            <div class="campo">
+                <label for="item-venda">Produto ou serviço</label>
+                <select id="item-venda" required>
+                    <option value="">Carregue o catálogo primeiro</option>
+                </select>
+            </div>
+            <div class="grade-campos">
+                <div class="campo">
+                    <label for="quantidade-venda">Quantidade</label>
+                    <input id="quantidade-venda" type="number" min="1" step="1" value="1" required>
+                </div>
+                <div class="campo campo-botao-venda">
+                    <label aria-hidden="true">&nbsp;</label>
+                    <button class="botao botao-catalogo-salvar" id="adicionar-item-venda" type="submit">Adicionar item</button>
+                </div>
+            </div>
+            <div class="venda-carrinho-cabecalho">
+                <h3>Itens desta venda</h3>
+                <span id="total-itens-venda">0 itens</span>
+            </div>
+            <div id="carrinho-venda" class="lista-historico">
+                <div class="historico-vazio">Adicione itens para calcular o total.</div>
+            </div>
+            <div class="campo campo-observacao-venda">
+                <label for="observacao-venda">Observação (opcional)</label>
+                <textarea id="observacao-venda" rows="2" maxlength="300" placeholder="Ex.: pagamento recebido por Pix"></textarea>
+            </div>
+            <div class="venda-total-resumo">
+                <span>Total da venda</span>
+                <strong id="total-venda">R$ 0,00</strong>
+            </div>
+            <button class="botao botao-catalogo-salvar" id="salvar-venda" type="button">Registrar venda</button>
+        </form>
+        <p class="historico-nota">Projeto experimental: o nickname identifica o catálogo, mas não é uma senha.</p>
+    </aside>
 
     <main class="container">
         <section class="introducao">
